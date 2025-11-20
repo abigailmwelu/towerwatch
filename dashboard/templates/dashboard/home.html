@@ -1,0 +1,57 @@
+{% load static %}
+{% load plotly_dash %}
+
+<h2>Live Threat Dashboard</h2>
+
+<div class="dashboard-container">
+    <div class="chart-container">
+        {% plotly_app name="ThreatChart" %}
+    </div>
+    
+    <div id="live-alerts">
+        <h3>Recent Alerts</h3>
+        {% for alert in alerts %}
+            <div class="alert-box {% if alert.threat_level == 'high' %}alert-high{% elif alert.threat_level == 'medium' %}alert-medium{% else %}alert-low{% endif %}">
+                <strong>{{ alert.timestamp }}</strong> - {{ alert.verdict }} (Score: {{ alert.score }})
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+}
+
+.chart-container {
+    flex: 2;
+    min-width: 0; /* Ensures flex items respect their container's width */
+}
+
+#live-alerts {
+    flex: 1;
+    max-width: 400px;
+    overflow-y: auto;
+    max-height: 600px;
+}
+</style>
+
+<script>
+setInterval(function(){
+    fetch("/api/recent-alerts/")
+    .then(response => response.json())
+    .then(data => {
+        let container = document.getElementById("live-alerts");
+        container.innerHTML = "";
+        data.forEach(alert => {
+            let color = alert.threat_level === "high" ? "#f8d7da" :
+                        alert.threat_level === "medium" ? "#fff3cd" : "#d4edda";
+            let div = `<div style="border:1px solid #ccc; padding:10px; margin:5px; background-color:${color};">
+                            <strong>${alert.timestamp}</strong> - ${alert.verdict} (Score: ${alert.score})
+                        </div>`;
+            container.innerHTML += div;
+        });
+    });
+}, 5000);
+</script>

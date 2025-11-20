@@ -1,0 +1,18 @@
+{
+  "training_date": "2025-11-17T11:40:52.104613",
+  "n_samples": 1030,
+  "n_features": 6,
+  "contamination": 0.02912621359223301,
+  "score_threshold": -0.5938172111389045,
+  "parameters": {
+    "bootstrap": false,
+    "contamination": 0.02912621359223301,
+    "max_features": 1.0,
+    "max_samples": "auto",
+    "n_estimators": 100,
+    "n_jobs": -1,
+    "random_state": 42,
+    "verbose": 1,
+    "warm_start": false
+  }
+}

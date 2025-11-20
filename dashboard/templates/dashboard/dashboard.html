@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TowerWatch Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .chart-container {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TowerWatch: Real-Time Threat Dashboard</h1>
+    </header>
+    <main>
+        <div class="chart-container">
+            <canvas id="threatChart" width="900" height="450"></canvas>
+        </div>
+    </main>
+
+    <script>
+        const ctx = document.getElementById('threatChart').getContext('2d');
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: { labels: [], datasets: [{ label: 'Threat Score', data: [], backgroundColor: [] }] },
+            options: { scales: { y: { min: 0, max: 1 } } }
+        });
+
+        async function updateChart() {
+            const response = await fetch('/api/recent-alerts/');
+            const alerts = await response.json();
+            chart.data.labels = alerts.map(a => a.alert);
+            chart.data.datasets[0].data = alerts.map(a => a.threat_score);
+            chart.data.datasets[0].backgroundColor = alerts.map(a => a.color);
+            chart.update();
+        }
+
+        // Update the chart immediately and then every 5 seconds
+        updateChart();
+        setInterval(updateChart, 5000);
+
+        // Update the last updated time
+        function updateLastUpdated() {
+            const now = new Date();
+            document.getElementById('last-updated').textContent = now.toLocaleTimeString();
+        }
+        updateLastUpdated();
+        setInterval(updateLastUpdated, 1000);
+    </script>
+    <footer>
+        <p>Last updated: <span id="last-updated">Just now</span></p>
+    </footer>
+</body>
+</html>

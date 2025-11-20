@@ -1,0 +1,19 @@
+/* Alert styles */
+.alert-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+}
+
+/* Threat level specific styles */
+.alert-high {
+    background-color: #f8d7da;
+}
+
+.alert-medium {
+    background-color: #fff3cd;
+}
+
+.alert-low {
+    background-color: #d4edda;
+}
