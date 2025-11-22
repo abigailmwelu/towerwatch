@@ -44,6 +44,23 @@ INSTALLED_APPS = [
     'alerts',
 ]
 
+# Rate limiting settings
+RATE_LIMITS = {
+    'default': {'requests': 100, 'window': 60},  # 100 requests per minute
+    'login': {'requests': 5, 'window': 60},     # 5 login attempts per minute
+    'api': {'requests': 1000, 'window': 3600},  # 1000 API requests per hour
+    'sensitive': {'requests': 10, 'window': 300},  # 10 sensitive operations per 5 minutes
+}
+
+# Redis settings (if not already set)
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+RATE_LIMIT_REDIS_DB = 0
+
+# Whether to exempt superusers from rate limiting
+RATE_LIMIT_EXEMPT_SUPERUSERS = True
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
