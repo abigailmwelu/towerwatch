@@ -12,7 +12,7 @@ TowerWatch is a Django-based web application designed for real-time threat monit
 - **User Authentication**: Secure login and role-based access control
 - **Responsive Design**: Works on desktop and mobile devices
 
-## 🛠 Prerequisites
+## Prerequisites
 
 - Python 3.8+
 - Django 5.2.8
@@ -28,6 +28,7 @@ TowerWatch is a Django-based web application designed for real-time threat monit
    ```bash
    git clone [https://github.com/yourusername/towerwatch.git](https://github.com/yourusername/towerwatch.git)
    cd towerwatch
+<<<<<<< HEAD
 
    Running the Project
 
@@ -39,3 +40,5 @@ TowerWatch is a Django-based web application designed for real-time threat monit
    .\.venv\Scripts\activate
    # macOS/Linux
    source .venv/bin/activate
+=======
+>>>>>>> 99f5fae0859f18338e0bb943aba105054fb66918
