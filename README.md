@@ -28,3 +28,14 @@ TowerWatch is a Django-based web application designed for real-time threat monit
    ```bash
    git clone [https://github.com/yourusername/towerwatch.git](https://github.com/yourusername/towerwatch.git)
    cd towerwatch
+
+   Running the Project
+
+### Development Server
+
+1. **Activate your virtual environment** (if not already activated)
+   ```bash
+   # Windows
+   .\.venv\Scripts\activate
+   # macOS/Linux
+   source .venv/bin/activate
